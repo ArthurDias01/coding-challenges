@@ -1,0 +1,56 @@
+<!-- Create a form with two inputs, a Name, an Email and a send button. validate name
+is not empty when user leaves the input validate email is not empty and it has
+at least one @ character in it. validate both are valid when pressing the send
+button on both cases change the border color to reflect the invalid state. -->
+
+<!-- Path: test6.html -->
+<!-- Compare this snippet from teste.html: -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <style>
+    .invalid {
+      border: 1px solid red;
+    }
+  </style>
+  <body>
+    <form>
+      <input type="text" id="name" placeholder="Name" />
+      <input type="email" id="email" placeholder="Email" />
+      <button type="submit">Send</button>
+    </form>
+    <script>
+      const name = document.getElementById("name");
+      const email = document.getElementById("email");
+      const form = document.querySelector("form");
+      const validateName = () => {
+        if (name.value === "") {
+          name.classList.add("invalid");
+        } else {
+          name.classList.remove("invalid");
+        }
+      };
+      const validateEmail = () => {
+        if (email.value === "" || !email.value.includes("@")) {
+          email.classList.add("invalid");
+        } else {
+          email.classList.remove("invalid");
+        }
+      };
+      const validateForm = () => {
+        validateName();
+        validateEmail();
+      };
+      name.addEventListener("blur", validateName);
+      email.addEventListener("blur", validateEmail);
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        validateForm();
+      });
+    </script>
+  </body>
+</html>

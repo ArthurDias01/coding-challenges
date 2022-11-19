@@ -1,0 +1,42 @@
+<!-- use this api "https://jsonplaceholder.typicode.com/todos" to grab a to-do list and create cards for the first 5 with the title and the completed state -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>JS Bin</title>
+  </head>
+  <style>
+    .card {
+      width: 300px;
+      height: fit-content;
+      background-color: #fff;
+      border: 1px solid #000;
+      margin: 10px;
+      padding: 10px;
+    }
+  </style>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = document.getElementById("app");
+      const url = "https://jsonplaceholder.typicode.com/todos";
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          data.slice(0, 5).forEach((item) => {
+            const card = document.createElement("div");
+            card.classList.add("card");
+            const title = document.createElement("h2");
+            title.innerText = item.title;
+            const completed = document.createElement("p");
+            completed.innerText = item.completed;
+            card.appendChild(title);
+            card.appendChild(completed);
+            app.appendChild(card);
+          });
+        });
+    </script>
+  </body>
+</html>
